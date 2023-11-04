@@ -3,9 +3,11 @@ package com.example.tiktaktoe;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -19,7 +21,7 @@ public class TicTacToe extends Application {
     static int turnoJuagador = turnoJugarAleatorio();
     static GridPane tableroVisual = new GridPane();
     static String[][] tablero = {{"", "", ""}, {"", "", ""}, {"", "", ""}};
-
+    static Label textoGanar = new Label("");
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -50,7 +52,8 @@ public class TicTacToe extends Application {
             }
         }
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(tableroVisual);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(textoGanar, tableroVisual);
         Scene scene = new Scene(vBox,200,200);
         stage.setScene(scene);
         stage.show();
@@ -75,16 +78,20 @@ public class TicTacToe extends Application {
                 if(tablero[i][0].equals(jugador) && tablero[i][1].equals(jugador) && tablero[i][2].equals(jugador)){
                     if(jugador.equals("X")){
                         System.out.println("Ganador Player 2");
+                        textoGanar.setText("Ganador Player 2");
                     }else{
                         System.out.println("Ganador Player 1");
+                        textoGanar.setText("Ganador Player 1");
                     }
                     DesactivarBotones();
                 }
                 if(tablero[0][j].equals(jugador) && tablero[1][j].equals(jugador) && tablero[2][j].equals(jugador)){
                     if(jugador.equals("X")){
                         System.out.println("Ganador Player 2");
+                        textoGanar.setText("Ganador Player 2");
                     }else{
                         System.out.println("Ganador Player 1");
+                        textoGanar.setText("Ganador Player 1");
                     }
                     DesactivarBotones();
                 }
@@ -94,16 +101,20 @@ public class TicTacToe extends Application {
         if(tablero[0][0].equals(jugador) && tablero[1][1].equals(jugador) && tablero[2][2].equals(jugador)){
             if(jugador.equals("X")){
                 System.out.println("Ganador Player 2");
+                textoGanar.setText("Ganador Player 2");
             }else{
                 System.out.println("Ganador Player 1");
+                textoGanar.setText("Ganador Player 1");
             }
             DesactivarBotones();
         }
         if(tablero[2][0].equals(jugador) && tablero[1][1].equals(jugador) && tablero[0][2].equals(jugador)){
             if(jugador.equals("X")){
                 System.out.println("Ganador Player 2");
+                textoGanar.setText("Ganador Player 2");
             }else{
                 System.out.println("Ganador Player 1");
+                textoGanar.setText("Ganador Player 1");
             }
             DesactivarBotones();
         }
