@@ -3,6 +3,7 @@ package com.example.tiktaktoe;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -71,22 +72,50 @@ public class TicTacToe extends Application {
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
 
-                if(tablero[i][0].equals(jugador)  && tablero[i][1].equals(jugador) && tablero[i][2].equals(jugador)){
+                if(tablero[i][0].equals(jugador) && tablero[i][1].equals(jugador) && tablero[i][2].equals(jugador)){
                     if(jugador.equals("X")){
                         System.out.println("Ganador Player 2");
                     }else{
                         System.out.println("Ganador Player 1");
                     }
+                    DesactivarBotones();
                 }
-                if(tablero[0][j].equals(jugador)  && tablero[1][j].equals(jugador) && tablero[2][j].equals(jugador)){
-                    System.out.println("Ganador Player 2");
+                if(tablero[0][j].equals(jugador) && tablero[1][j].equals(jugador) && tablero[2][j].equals(jugador)){
                     if(jugador.equals("X")){
                         System.out.println("Ganador Player 2");
                     }else{
                         System.out.println("Ganador Player 1");
                     }
+                    DesactivarBotones();
                 }
             }
+        }
+
+        if(tablero[0][0].equals(jugador) && tablero[1][1].equals(jugador) && tablero[2][2].equals(jugador)){
+            if(jugador.equals("X")){
+                System.out.println("Ganador Player 2");
+            }else{
+                System.out.println("Ganador Player 1");
+            }
+            DesactivarBotones();
+        }
+        if(tablero[2][0].equals(jugador) && tablero[1][1].equals(jugador) && tablero[0][2].equals(jugador)){
+            if(jugador.equals("X")){
+                System.out.println("Ganador Player 2");
+            }else{
+                System.out.println("Ganador Player 1");
+            }
+            DesactivarBotones();
+        }
+    }
+
+    private void DesactivarBotones(){
+
+        Button botonObtenido = null;
+
+        for (Node nodo : tableroVisual.getChildren()) {
+            botonObtenido = (Button) nodo;
+            botonObtenido.setDisable(true);
         }
     }
 
