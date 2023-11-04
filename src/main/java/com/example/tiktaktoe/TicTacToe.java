@@ -22,6 +22,7 @@ public class TicTacToe extends Application {
     static GridPane tableroVisual = new GridPane();
     static String[][] tablero = {{"", "", ""}, {"", "", ""}, {"", "", ""}};
     static Label textoGanar = new Label("");
+    static boolean ganar = false ;
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -39,10 +40,12 @@ public class TicTacToe extends Application {
                             tablero[finalI][finalJ] = "O";
                             newButton.setText("O");
                             Ganar("O");
+                            Empate();
                         }else{
                             tablero[finalI][finalJ] = "X";
                             newButton.setText("X");
                             Ganar("X");
+                            Empate();
                         }
                         siguienteJugador();
                         newButton.setDisable(true);
@@ -54,11 +57,12 @@ public class TicTacToe extends Application {
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(textoGanar, tableroVisual);
-        Scene scene = new Scene(vBox,200,200);
+        Scene scene = new Scene(vBox,300,300);
+        stage.setResizable(false);
         stage.setScene(scene);
+        stage.setTitle("Tic Tac Toe");
         stage.show();
     }
-
     private static int turnoJugarAleatorio(){
         Random rnd = new Random();
         return rnd.nextInt(2);
@@ -70,7 +74,6 @@ public class TicTacToe extends Application {
             turnoJuagador = 0;
         }
     }
-
     private void Ganar(String jugador){
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
@@ -83,6 +86,7 @@ public class TicTacToe extends Application {
                         System.out.println("Ganador Player 1");
                         textoGanar.setText("Ganador Player 1");
                     }
+                    ganar = true;
                     DesactivarBotones();
                 }
                 if(tablero[0][j].equals(jugador) && tablero[1][j].equals(jugador) && tablero[2][j].equals(jugador)){
@@ -93,6 +97,7 @@ public class TicTacToe extends Application {
                         System.out.println("Ganador Player 1");
                         textoGanar.setText("Ganador Player 1");
                     }
+                    ganar = true;
                     DesactivarBotones();
                 }
             }
@@ -106,6 +111,7 @@ public class TicTacToe extends Application {
                 System.out.println("Ganador Player 1");
                 textoGanar.setText("Ganador Player 1");
             }
+            ganar = true;
             DesactivarBotones();
         }
         if(tablero[2][0].equals(jugador) && tablero[1][1].equals(jugador) && tablero[0][2].equals(jugador)){
@@ -116,7 +122,23 @@ public class TicTacToe extends Application {
                 System.out.println("Ganador Player 1");
                 textoGanar.setText("Ganador Player 1");
             }
+            ganar = true;
             DesactivarBotones();
+        }
+    }
+
+    private void Empate(){
+        Button botonObtenido = null;
+        int botonesClickados = 0;
+
+        for (Node nodo : tableroVisual.getChildren()) {
+            botonObtenido = (Button) nodo;
+            if (!botonObtenido.getText().isEmpty()){
+                botonesClickados++;
+            }
+            if(botonesClickados == 9 && !ganar){
+                textoGanar.setText("Empate");
+            }
         }
     }
 
